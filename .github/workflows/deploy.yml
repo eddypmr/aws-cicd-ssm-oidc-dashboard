@@ -1,0 +1,12 @@
+name: Deploy (SSM + OIDC)
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "Workflow placeholder - will be implemented in Project 3"
