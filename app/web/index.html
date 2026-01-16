@@ -3,10 +3,80 @@
     <head>
         <meta charset="UTF-8">
         <title>Status Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                font-family: system-ui, Arial;
+                margin: 24px;
+                max-width: 900px;
+            }
+            h1 { margin-bottom: 6px;}
+            .muted {
+                color: #666;
+                font-size: 0;
+            }
+            .grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+                margin-top: 18px;
+            }
+            .card {
+                border: 1px solid #ddd;
+                border-radius: 12px;
+                padding: 14px;
+            }
+            pre {
+                background-color: #f6f6f6;
+                padding: 12px;
+                border-radius: 10px ; /*solid #ddd;*/
+                overflow-x: auto;
+            }
+            button {
+                padding: 10px 12px;
+                border-radius: 10px;
+                border: 1px solid #ccc;
+                cursor: pointer;
+                background: #fff;
+                font-size: 14px;
+            }
+            button:hover {
+                background-color: #f5f5f5;
+            }
+            @media (max-width: 820px) {
+                .grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
     </head>
     <body>
         <h1>Status Dashboard</h1>
-        <pre id="out">Loading...</pre>
+        <p class="muted">Health, version and system data for quick operations checks.</p>
+
+        <button id="refresh">Refresh Data</button>
+
+        <div class="grid">
+            <div class="card">
+                <h3>/health</h3>
+                <pre id="health">Loading...</pre>
+            </div>
+            
+            <div class="card">
+                <h3>/version</h3>
+                <pre id="version">Loading...</pre>
+            </div>
+            
+            <div class="card">
+                <h3>/system</h3>
+                <pre id="system">Loading...</pre>
+            </div>
+            
+            <div class="card">
+                <h3>/docker</h3>
+                <pre id="docker">Loading...</pre>
+            </div>
+        </div>  
         <script src="app.js"></script>
     </body>
 </html>
