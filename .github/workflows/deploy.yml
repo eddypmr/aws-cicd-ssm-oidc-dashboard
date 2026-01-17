@@ -4,9 +4,40 @@ on:
   push:
     branches: ["main"]
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - run: echo "Workflow placeholder - will be implemented in Project 3"
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::151580225166:role/GitHubActions-SSM-Deploy
+          aws-region: eu-west-1
+
+      - name: Verify AWS Identity
+        run: aws sts get-caller-identity
+      
+      - name: Deploy to EC2 via SSM
+        run: |
+          aws ssm send-command \
+            --document-name "AWS-RunShellScript" \
+            --targets "Key=instanceIds,Values=i-0060e541d4b24483c"  \
+            --comment "Deploy ops dashboard via OIDC + SSM" \
+            --parameters commands="\
+              set -e; \
+              cd /home/ec2-user; \
+              rm -rf app || true; \
+              git clone https://github.com/eddypmr/aws-project3-cicd-ssm-oidc-dashboard.git app; \
+              cd app; \
+              sudo docker build -t ops-dashboard:latest -f app/api/Dockerfile app; \
+              sudo docker rm -f dashboard || true; \
+              sudo docker run -d --name dashboard 80:8000 ops-dashboard:latest \
+              "
