@@ -35,13 +35,13 @@ jobs:
               set -euxo pipefail; \
               cd /home/ec2-user; \
               rm -rf app || true; \
-              git clone https://github.com/eddypmr/aws-project3-cicd-ssm-oidc-dashboard.git app; \
+              git clone https://github.com/eddypmr/aws-cicd-ssm-oidc-dashboard.git app; \
               cd app; \
               ls -la; \
               ls -la app/api; \
               ls -la app/web; \
               sudo docker build -t ops-dashboard:latest -f app/api/Dockerfile app; \
               sudo docker rm -f dashboard || true; \
-              sudo docker run -d --name dashboard -p 80:8000 ops-dashboard:latest \
+              sudo docker run -d --name dashboard -p 80:8000 ops-dashboard:latest; \
               sudo docker ps; \
               "
