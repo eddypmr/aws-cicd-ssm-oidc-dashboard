@@ -65,7 +65,7 @@ From repo root:
 ```bash
 docker build -t ops-dashboard:dev -f app/api/Dockerfile app
 docker run --rm -p 8080:8000 ops-dashboard:dev
-
+```
 
 OPEN in http://localhost:8080/
 
