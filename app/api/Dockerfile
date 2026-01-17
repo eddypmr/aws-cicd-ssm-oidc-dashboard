@@ -8,7 +8,7 @@ COPY api/main.py .
 COPY api/web.py .
 
 # Copy frontend (served by FastAPI StaticFiles)
-COPY ../web ./web
+COPY web ./web
 
 EXPOSE 8000
 ENV APP_VERSION=dev
