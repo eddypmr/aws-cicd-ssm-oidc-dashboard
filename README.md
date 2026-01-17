@@ -65,7 +65,7 @@ From repo root:
 ```bash
 docker build -t ops-dashboard:dev -f app/api/Dockerfile app
 docker run --rm -p 8080:8000 ops-dashboard:dev
-
+```
 
 OPEN in http://localhost:8080/
 
@@ -90,7 +90,7 @@ OPEN in http://localhost:8080/
     terraform destroy
 ```
 
-### NOTAS ###
+### NOTES ###
 
 /docker endpoint is intentionally not available in production by default.
 Allowing a container to control Docker requires mounting the Docker socket (/var/run/docker.sock), which is often avoided for security reasons.
