@@ -90,7 +90,7 @@ OPEN in http://localhost:8080/
     terraform destroy
 ```
 
-### NOTAS ###
+### NOTES ###
 
 /docker endpoint is intentionally not available in production by default.
 Allowing a container to control Docker requires mounting the Docker socket (/var/run/docker.sock), which is often avoided for security reasons.
